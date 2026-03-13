@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="manifest" href="manifest.json">
+  <title>App Triggers</title>
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>App Triggers 🔫</h1>
+  </header>
+
+  <div class="container">
+    <a href="index.html" class="back-link">Back to Apps</a>
+
+    <div class="form-container">
+      <form id="triggerForm">
+        <div class="form-group">
+          <label for="trigger">Select Trigger</label>
+          <select id="trigger" name="trigger" required>
+                                                                                                <option value="">Choose a trigger...</option>
+            <option value="create-habit-todo">Create habit todos</option>
+            <option value="process-reminders">Find and send any due reminders</option>
+            <option value="playlist-clean">Clean up playlists</option>
+            <option value="football-alerts">Alert with email if there is a Derby home game today</option>
+            <option value="smarter-playlist-create">Create today's playlist</option>
+            <option value="daily-vocal-exercises">Create Daily Vocal Exercises playlist</option>
+            <option value="derby-county-fixtures">Find Derby County Fixtures and save as events</option>
+            <option value="email-this-weeks-todos">Email's this week's todos</option>
+            <option value="rebuild-holiday-events">Rebuilds holiday events</option>
+            <option value="rebuild-database-from-files">Rebuild files database from Synco storage</option>
+            <option value="generate-recurring-events">Generate and save the recurring events</option>
+            <option value="housekeep-reminders">Delete old reminders</option>
+          </select>
+        </div>
+
+        <button type="submit">Submit</button>
+
+        <div class="success-message" id="successMessage">
+          ✓ Your trigger has been sent to your email!
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    document.getElementById('triggerForm').addEventListener('submit', function(e) {
+      const trigger = document.getElementById('trigger').value;
+      
+      const formData = {
+        subject: `trigger ${trigger}`,
+        body: ''
+      };
+      
+      submitForm(e, formData, 'App Triggers');
+    });
+  </script>
+</body>
+</html>

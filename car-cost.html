@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="manifest" href="manifest.json">
+  <title>Car Cost Calculator</title>
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Car Cost Calculator 🚘</h1>
+  </header>
+
+  <div class="container">
+    <a href="index.html" class="back-link">Back to Apps</a>
+
+    <div class="form-container">
+      <form id="carForm">
+        <div class="form-group">
+          <label for="mileage">Estimated Mileage (miles/year)</label>
+          <input 
+            type="number" 
+            id="mileage" 
+            name="mileage" 
+            step="100" 
+            required 
+            placeholder="e.g., 10000"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="fuelCost">Fuel Cost (£/litre)</label>
+          <input 
+            type="number" 
+            id="fuelCost" 
+            name="fuelCost" 
+            step="0.01" 
+            required 
+            placeholder="e.g., 1.50"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="urbanMpg">Urban MPG (Miles Per Gallon)</label>
+          <input 
+            type="number" 
+            id="urbanMpg" 
+            name="urbanMpg" 
+            step="0.1" 
+            required 
+            placeholder="e.g., 30"
+          >
+        </div>
+
+        <button type="submit">Calculate</button>
+
+        <div class="success-message" id="successMessage">
+          ✓ Your car cost calculation has been sent to your email!
+        </div>
+      </form>
+
+      <div id="results" style="display: none; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #404040;">
+        <h2 style="margin-bottom: 1rem;">Calculation Results</h2>
+        <div class="form-group">
+          <label>Yearly Fuel Spend:</label>
+          <p style="font-size: 1.3rem; color: #64b5f6; margin: 0.5rem 0;"><strong id="yearlyFuelSpend">£0.00</strong></p>
+        </div>
+        <div class="form-group">
+          <label>Total Yearly Cost (including maintenance estimate):</label>
+          <p style="font-size: 1.3rem; color: #64b5f6; margin: 0.5rem 0;"><strong id="totalYearlyCost">£0.00</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    document.getElementById('carForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const mileage = parseFloat(document.getElementById('mileage').value);
+      const fuelCost = parseFloat(document.getElementById('fuelCost').value);
+      const urbanMpg = parseFloat(document.getElementById('urbanMpg').value);
+      
+      // Calculate yearly fuel spend
+      const gallonsPerYear = mileage / urbanMpg;
+      const litresPerYear = gallonsPerYear * 4.54609; // 1 gallon = 4.54609 litres
+      const yearlyFuelSpend = litresPerYear * fuelCost;
+      
+      // Estimate total yearly cost (fuel + maintenance ~£500/year)
+      const maintenanceEstimate = 500;
+      const totalYearlyCost = yearlyFuelSpend + maintenanceEstimate;
+      
+      // Display results
+      document.getElementById('yearlyFuelSpend').textContent = '£' + yearlyFuelSpend.toFixed(2);
+      document.getElementById('totalYearlyCost').textContent = '£' + totalYearlyCost.toFixed(2);
+      document.getElementById('results').style.display = 'block';
+      
+      // Prepare email
+      const formData = {
+        subject: `Car Cost: £${yearlyFuelSpend.toFixed(2)}/year fuel, £${totalYearlyCost.toFixed(2)}/year total`,
+        body: `Yearly Mileage: ${mileage} miles\n` +
+              `Fuel Cost: £${fuelCost}/litre\n` +
+              `Urban MPG: ${urbanMpg}\n\n` +
+              `Calculation Results:\n` +
+              `Yearly Fuel Spend: £${yearlyFuelSpend.toFixed(2)}\n` +
+              `Maintenance Estimate: £${maintenanceEstimate.toFixed(2)}\n` +
+              `Total Yearly Cost: £${totalYearlyCost.toFixed(2)}`
+      };
+      
+      submitForm(e, formData, 'Car Cost Calculator');
+    });
+  </script>
+</body>
+</html>

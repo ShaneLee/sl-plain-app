@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="manifest" href="manifest.json">
+  <title>Weight Tracking</title>
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Weight Tracking ⚖️</h1>
+  </header>
+
+  <div class="container">
+    <a href="index.html" class="back-link">Back to Apps</a>
+
+    <div class="form-container">
+      <form id="weightForm">
+        <div class="form-group">
+          <label for="weight">Weight (Kg)</label>
+          <input 
+            type="number" 
+            id="weight" 
+            name="weight" 
+            step="0.1" 
+            required 
+            placeholder="0.0"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="bodyFat">Body Fat (%)</label>
+          <input 
+            type="number" 
+            id="bodyFat" 
+            name="bodyFat" 
+            step="0.1" 
+            placeholder="0.0"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="bodyWater">Body Water (%)</label>
+          <input 
+            type="number" 
+            id="bodyWater" 
+            name="bodyWater" 
+            step="0.1" 
+            placeholder="0.0"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="muscleMass">Muscle Mass (Kg)</label>
+          <input 
+            type="number" 
+            id="muscleMass" 
+            name="muscleMass" 
+            step="0.1" 
+            placeholder="0.0"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="visceralFat">Visceral Fat</label>
+          <input 
+            type="number" 
+            id="visceralFat" 
+            name="visceralFat" 
+            step="0.1" 
+            placeholder="0.0"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="calorieIntake">Recommended Calorie Intake</label>
+          <input 
+            type="number" 
+            id="calorieIntake" 
+            name="calorieIntake" 
+            step="1" 
+            placeholder="0"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input 
+            type="date" 
+            id="date" 
+            name="date" 
+            required
+          >
+        </div>
+
+        <button type="submit">Submit</button>
+
+        <div class="success-message" id="successMessage">
+          ✓ Your weight tracking data has been sent to your email!
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    document.getElementById('weightForm').addEventListener('submit', function(e) {
+      const weight = document.getElementById('weight').value;
+      const bodyFat = document.getElementById('bodyFat').value || 'N/A';
+      const bodyWater = document.getElementById('bodyWater').value || 'N/A';
+      const muscleMass = document.getElementById('muscleMass').value || 'N/A';
+      const visceralFat = document.getElementById('visceralFat').value || 'N/A';
+      const calorieIntake = document.getElementById('calorieIntake').value || 'N/A';
+      const date = document.getElementById('date').value;
+      
+      const formData = {
+        subject: `Weight ${weight}kg, BF${bodyFat}%, BW${bodyWater}%, MM${muscleMass}kg, VF${visceralFat}, Cals${calorieIntake}, ${date}`,
+        body: ''
+      };
+      
+      submitForm(e, formData, 'Weight Tracking');
+    });
+  </script>
+</body>
+</html>

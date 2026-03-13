@@ -1,0 +1,23 @@
+{
+  "name": "Personal Apps",
+  "short_name": "Apps",
+  "description": "A collection of personal productivity tools",
+  "start_url": "/sl-plain-app/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

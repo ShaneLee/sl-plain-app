@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="manifest" href="manifest.json">
+  <title>Create Account</title>
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Create Account 🏦</h1>
+  </header>
+
+  <div class="container">
+    <a href="index.html" class="back-link">Back to Apps</a>
+
+    <div class="form-container">
+      <form id="accountForm">
+        <div class="form-group">
+          <label for="accountAlias">Account Alias</label>
+          <input 
+            type="text" 
+            id="accountAlias" 
+            name="accountAlias" 
+            required 
+            placeholder="e.g., 'current', 'savings'"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="name">Account Name</label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name" 
+            required 
+            placeholder="Full account name"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="accountType">Account Type</label>
+          <select id="accountType" name="accountType" required>
+            <option value="">Select account type...</option>
+            <option value="CREDIT">Credit Card</option>
+            <option value="DEBIT">Debit Card</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="balance">Initial Balance (GBP)</label>
+          <input 
+            type="number" 
+            id="balance" 
+            name="balance" 
+            step="0.01" 
+            required 
+            placeholder="0.00"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="interestRate">Interest Rate (%)</label>
+          <input 
+            type="number" 
+            id="interestRate" 
+            name="interestRate" 
+            step="0.01" 
+            placeholder="0.00"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="limit">Account Limit (GBP, Optional)</label>
+          <input 
+            type="number" 
+            id="limit" 
+            name="limit" 
+            step="0.01" 
+            placeholder="0.00"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="accountNumber">Account Number</label>
+          <input 
+            type="text" 
+            id="accountNumber" 
+            name="accountNumber" 
+            required 
+            placeholder="Enter account number"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="sortCode">Sort Code</label>
+          <input 
+            type="text" 
+            id="sortCode" 
+            name="sortCode" 
+            required 
+            placeholder="e.g., 40-30-20"
+          >
+        </div>
+
+        <button type="submit">Create Account</button>
+
+        <div class="success-message" id="successMessage">
+          ✓ Your account details have been sent to your email!
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    document.getElementById('accountForm').addEventListener('submit', function(e) {
+      const accountAlias = document.getElementById('accountAlias').value;
+      const name = document.getElementById('name').value;
+      const accountType = document.getElementById('accountType').value;
+      const balance = document.getElementById('balance').value;
+      const interestRate = document.getElementById('interestRate').value;
+      const limit = document.getElementById('limit').value || 'N/A';
+      const accountNumber = document.getElementById('accountNumber').value;
+      const sortCode = document.getElementById('sortCode').value;
+      
+      const formData = {
+        subject: `Create Account: ${name} (${accountAlias})`,
+        body: `Account Alias: ${accountAlias}\n` +
+              `Account Name: ${name}\n` +
+              `Type: ${accountType}\n` +
+              `Balance: £${balance}\n` +
+              `Interest Rate: ${interestRate}%\n` +
+              `Limit: £${limit}\n` +
+              `Account Number: ${accountNumber}\n` +
+              `Sort Code: ${sortCode}`
+      };
+      
+      submitForm(e, formData, 'Create Account');
+    });
+  </script>
+</body>
+</html>
