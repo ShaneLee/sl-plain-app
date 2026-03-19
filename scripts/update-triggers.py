@@ -11,8 +11,8 @@ if len(sys.argv) < 2:
 triggers_json = sys.argv[1]
 triggers = json.loads(triggers_json)
 
-# Read the current trigger.html file
-with open('trigger.html', 'r') as f:
+# Read the current index.html file
+with open('index.html', 'r') as f:
     html_content = f.read()
 
 # Generate the new option elements (preserve all rest of form)
@@ -26,8 +26,8 @@ pattern = r'(<select id="trigger" name="trigger" required>\s*)<option value="">.
 replacement = f'\\1{options_html}          </select>'
 html_content = re.sub(pattern, replacement, html_content, flags=re.DOTALL)
 
-# Write the updated HTML back to trigger.html
-with open('trigger.html', 'w') as f:
+# Write the updated HTML back to index.html
+with open('index.html', 'w') as f:
     f.write(html_content)
 
-print("✅ Updated trigger.html with new trigger options")
+print("✅ Updated index.html with new trigger options")
