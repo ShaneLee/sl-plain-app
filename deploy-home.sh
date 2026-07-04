@@ -31,3 +31,6 @@ rsync -av --include='*.html' --include='*.js' --include='*.css' --include='*.jso
 
 # Set 755 permissions on the deployed files
 ssh shane@$NIGHTINGALE "chmod -R 755 /var/www/html/sl-plain-app 2>/dev/null || true"
+
+echo "Deployed to: http:/$NIGHTINGALE/sl-plain-app/index.html"
+
