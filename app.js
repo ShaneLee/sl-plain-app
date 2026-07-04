@@ -3,6 +3,12 @@
 function submitForm(event, formData, successId) {
   event.preventDefault();
 
+  const dateInputs = event.target.querySelectorAll('input[type="date"], input[type="datetime-local"]');
+  const dateValues = [];
+  dateInputs.forEach(input => {
+    dateValues.push({ input: input, value: input.value });
+  });
+
   const email = '{{EMAIL}}';
   const subject = formData.subject;
   const body = formData.body || '';
@@ -16,6 +22,10 @@ function submitForm(event, formData, successId) {
   }
 
   event.target.reset();
+
+  dateValues.forEach(item => {
+    item.input.value = item.value;
+  });
 }
 
 function formatDate(date) {
